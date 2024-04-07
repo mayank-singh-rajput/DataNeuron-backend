@@ -34,7 +34,7 @@ class UserRepository {
         try {
             const user = await User.findByIdAndDelete(id);
             if (!user) {
-                throw new Error(`User with id ${id} not found`);
+                return false
             }
             return true;
         } catch (error) {

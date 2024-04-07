@@ -34,7 +34,7 @@ class MarkRepository {
         try {
             const mark = await Mark.findByIdAndDelete(id);
             if (!mark) {
-                throw new Error(`Mark with id ${id} not found`);
+                return false
             }
             return true;
         } catch (error) {
@@ -59,11 +59,11 @@ class MarkRepository {
     }
 
     // get Mark by userId
-    async getMarkByUserId(userId: string): Promise<IGetMarks> {
+    async getMarkByUserId(userId: string): Promise<any> {
         try {
             const mark = await Mark.findOne({ userId }).populate('userId');
             if (!mark) {
-                throw new Error(`Mark with userId ${userId} not found`);
+                return null;
             }
             return mark.toObject() as IGetMarks;
         } catch (error) {
